@@ -118,15 +118,28 @@ CREATE TABLE usuarios
 	nombreusuario	VARCHAR(30)	NOT NULL,
 	claveacceso	VARCHAR(90)	NOT NULL,
 	apellidos	VARCHAR(30)	NOT NULL,
+	nombres 	VARCHAR(30)	NOT NULL,
 	nivelacceso	CHAR(1)		NOT NULL DEFAULT "A",
 	estado		CHAR(1) 	NOT NULL DEFAULT'1',
 	fecharegistro	DATETIME	NOT NULL DEFAULT NOW(),
-	fechaupdate	DATETIME NULL,
+	fechaupdate	DATETIME 	NULL,
 	CONSTRAINT uk_nombreusuario_usa UNIQUE (nombreusuario)
 
 )ENGINE = INNODB;
 
 INSERT INTO usuarios (nombreusuario, claveacceso, apellidos, nombres) VALUES
-('ronald', '123456', 'Manza Martinez', 'Ronald'),
+('Ronald', '123456', 'Manza Martinez', 'Ronald'),
 ('Joel', '123456', 'Rojas Marcos', 'Jose Joel');
+
  SELECT *FROM usuarios;
+ 
+ -- actualizando por la clave encriptada
+ -- defecto: SENATI
+ UPDATE usuarios SET
+	claveacceso = '$2y$10$wuKLOUolq1eFegy8KUoB2Ogmph4JdJp8DHPSDndnF/4rE4venqgWi'
+	WHERE idusuario = 1;
+ 
+ UPDATE usuarios SET 
+	claveacceso = '$2y$10$0CuglAsOtI9uVIMnQhHU8.VP0/fiEN9gUUxtCcQNutLYgRKta3Jx2'
+	WHERE IDUSUARIO = 2;
+SELECT *FROM usuarios;
